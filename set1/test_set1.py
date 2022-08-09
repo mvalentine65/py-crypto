@@ -55,3 +55,12 @@ class TestSingleByteXor(unittest.TestCase):
         target = "Cooking MC's like a pound of bacon"
         answer, _ = brute_force_single_xor(hexed)
         self.assertEqual(target, answer)
+
+
+class TestBreakRepeatingEncryption(unittest.TestCase):
+    
+    def test_hamming_distance(self):
+        first = "this is a test"
+        second = "wokka wokka!!!"
+        expected = 37
+        self.assertEqual(expected, hamming_distance(first, second))

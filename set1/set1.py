@@ -1,6 +1,8 @@
 import base64
 from frequencies import unigram_frequencies
-
+# DONE: Corrected hamming distnace, strings needed extra hex() call
+# TODO: Find key length
+# TODO: Crack Block Cipher
 def bite(hexstring: str) -> bytearray:
     """
     Accepts a hexstring where every 2 characters represents one byte.
@@ -122,7 +124,22 @@ def repeating_xor_encryption(plaintext: str, key: str) -> bytearray:
         output.append(plain_bytes[i] ^ key_bytes[key_index])
     return bytearray(output)
 
+
+def str_to_bin(string: str) -> bytearray:
+     return bite(string.encode().hex())
     
+
+
+def hamming_distance(one: str, two: str) -> int:
+    alpha = str_to_bin(one)
+    beta = str_to_bin(two)
+    xord = xor_bytearrays(alpha, beta)
+    distance = 0
+    binary = ''.join(bin(x)[2:] for x in xord)
+    for b in binary:
+        distance += int(b)
+    return distance
+
 
 if __name__ == '__main__':
     x = hex_to_base64('49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d')
